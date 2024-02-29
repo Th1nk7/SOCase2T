@@ -9,18 +9,13 @@ function setup(){
   })
 
   socket.on('udp-message', (msg)=>{
-    udpDiv.child(
-      var canvas = document.createElement("canvas");
-      var img = document.createElement("img");
-      img.src = 
-    );
-    udpDiv.elt.scrollTop = udpDiv.elt.scrollHeight 
+    loadImage('data:image/png;base64,' + msg, imageLoaded);
   })
 }
 
-
-
-
-
-
-  
+function imageLoaded(img){
+  udpDiv.child(
+    image(img,0,0)
+  );
+  udpDiv.elt.scrollTop = udpDiv.elt.scrollHeight;
+}
