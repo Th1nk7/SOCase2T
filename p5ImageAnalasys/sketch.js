@@ -40,10 +40,6 @@ let rowTenAvgR = 0;
 let rowTenAvgG = 0;
 let rowTenAvgB = 0;
 
-function preload() {
-  //img = loadImage('/../node-udp-server/imageBuffer');
-}
-
 async function loadImageAsync () {
   img = await  loadImage('/../node-udp-server/imageBuffer');
   console.log('image loaded', img)
