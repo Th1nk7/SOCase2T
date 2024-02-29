@@ -2,6 +2,7 @@
 let udpDiv
 
 function setup(){
+  createCanvas(1000,1000)
   udpDiv = select('#udp-messages')
   var socket = io()
   socket.on('ip', (msg) => {
@@ -14,8 +15,7 @@ function setup(){
 }
 
 function imageLoaded(img){
-  udpDiv.child(
-    image(img,0,0)
-  );
+  image(img,0,0)
+  console.log("image loaded")
   udpDiv.elt.scrollTop = udpDiv.elt.scrollHeight;
 }

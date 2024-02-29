@@ -17,6 +17,7 @@ app.post('/', function (req, res) {
       var base64Data = body.replace(/^data:image\/png;base64,/, "");
       console.log(base64Data)
       sendUdp(base64Data)
+      console.log("DATA SENT!")
       res.end('ok');
     });
   } else {
