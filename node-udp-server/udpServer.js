@@ -10,6 +10,7 @@ server.on('error', (err) => {
 
 server.on('message', (msg, rinfo) => {
   console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+
   fs.writeFile('imageBuffer', msg, { encoding: 'base64' }, (err) => {
     if (err) throw err;
     console.log('Image data written to file');
@@ -45,3 +46,5 @@ const httpServer = http.createServer((req, res) => {
 httpServer.listen(8080, () => {
   console.log(`HTTP server listening on http://localhost:8080`);
 });
+
+
