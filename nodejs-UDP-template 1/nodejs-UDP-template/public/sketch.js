@@ -52,10 +52,12 @@ let playing = false;
 let osc
 let cnv
 let dropDown
+let hOne = [],hTwo = [],hThree = [];
+let CHOne = 0, CHTwo = 0, CHThree = 0
 
 
 function setup(){
-  cnv = createCanvas(1000,1000)
+  cnv = createCanvas(windowWidth,windowHeight);
   cnv.mousePressed(playOscillator);
 
   dropDown = createSelect().position(20,125)
@@ -350,51 +352,82 @@ function imageLoaded(img){
   rowTenAvgB = Math.round(rowTenAvgB/rowTen.length)
   console.log(rowTenAvgR+" "+rowTenAvgG+" "+rowTenAvgB)
 
-  amp[0] = constrain(map(rowOneAvgR, 255, 0, 1, 0), 0, 1)
-  freq[0] = constrain(map(rowOneAvgG, 255, 0, 500, 100), 100, 500)
+  amp[0] = constrain(map(rowOneAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[0] = constrain(map(rowOneAvgG, 255, 0, 500, 200), 200, 500)
   p[0] = constrain(map(rowOneAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[0] = rowOneAvgR
+  hTwo[0] = rowOneAvgG
+  hThree[0] = rowOneAvgB
 
-  amp[1] = constrain(map(rowTwoAvgR, 255, 0, 1, 0), 0, 1)
-  freq[1] = constrain(map(rowTwoAvgG, 255, 0, 500, 100), 100, 500)
+  amp[1] = constrain(map(rowTwoAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[1] = constrain(map(rowTwoAvgG, 255, 0, 500, 200), 200, 500)
   p[1] = constrain(map(rowTwoAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[1] = rowTwoAvgR
+  hTwo[1] = rowTwoAvgG
+  hThree[1] = rowTwoAvgB
 
-  amp[2] = constrain(map(rowThreeAvgR, 255, 0, 1, 0), 0, 1)
-  freq[2] = constrain(map(rowThreeAvgG, 255, 0, 500, 100), 100, 500)
+  amp[2] = constrain(map(rowThreeAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[2] = constrain(map(rowThreeAvgG, 255, 0, 500, 200), 200, 500)
   p[2] = constrain(map(rowThreeAvgB, 255, 0, 1, -1), -1, 1)
-  
-  amp[3] = constrain(map(rowFourAvgR, 255, 0, 1, 0), 0, 1)
-  freq[3] = constrain(map(rowFourAvgG, 255, 0, 500, 100), 100, 500)
+  hOne[2] = rowThreeAvgR
+  hTwo[2] = rowThreeAvgG
+  hThree[2] = rowThreeAvgB
+
+  amp[3] = constrain(map(rowFourAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[3] = constrain(map(rowFourAvgG, 255, 0, 500, 200), 200, 500)
   p[3] = constrain(map(rowFourAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[3] = rowFourAvgR
+  hTwo[3] = rowFourAvgG
+  hThree[3] = rowFourAvgB
 
-  amp[4] = constrain(map(rowFiveAvgR, 255, 0, 1, 0), 0, 1)
-  freq[4] = constrain(map(rowFiveAvgG, 255, 0, 500, 100), 100, 500)
+  amp[4] = constrain(map(rowFiveAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[4] = constrain(map(rowFiveAvgG, 255, 0, 500, 200), 200, 500)
   p[4] = constrain(map(rowFiveAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[4] = rowFiveAvgR
+  hTwo[4] = rowFiveAvgG
+  hThree[4] = rowFiveAvgB
 
-  amp[5] = constrain(map(rowSixAvgR, 255, 0, 1, 0), 0, 1)
-  freq[5] = constrain(map(rowSixAvgG, 255, 0, 500, 100), 100, 500)
+  amp[5] = constrain(map(rowSixAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[5] = constrain(map(rowSixAvgG, 255, 0, 500, 200), 200, 500)
   p[5] = constrain(map(rowSixAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[5] = rowSixAvgR
+  hTwo[5] = rowSixAvgG
+  hThree[5] = rowSixAvgB
 
-  amp[6] = constrain(map(rowSevenAvgR, 255, 0, 1, 0), 0, 1)
-  freq[6] = constrain(map(rowSevenAvgG, 255, 0, 500, 100), 100, 500)
+  amp[6] = constrain(map(rowSevenAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[6] = constrain(map(rowSevenAvgG, 255, 0, 500, 200), 200, 500)
   p[6] = constrain(map(rowSevenAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[6] = rowSevenAvgR
+  hTwo[6] = rowSevenAvgG
+  hThree[6] = rowSevenAvgB
 
-  amp[7] = constrain(map(rowEightAvgR, 255, 0, 1, 0), 0, 1)
-  freq[7] = constrain(map(rowEightAvgG, 255, 0, 500, 100), 100, 500)
+  amp[7] = constrain(map(rowEightAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[7] = constrain(map(rowEightAvgG, 255, 0, 500, 200), 200, 500)
   p[7] = constrain(map(rowEightAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[7] = rowEightAvgR
+  hTwo[7] = rowEightAvgG
+  hThree[7] = rowEightAvgB
 
-  amp[8] = constrain(map(rowNineAvgR, 255, 0, 1, 0), 0, 1)
-  freq[8] = constrain(map(rowNineAvgG, 255, 0, 500, 100), 100, 500)
+  amp[8] = constrain(map(rowNineAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[8] = constrain(map(rowNineAvgG, 255, 0, 500, 200), 200, 500)
   p[8] = constrain(map(rowNineAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[8] = rowNineAvgR
+  hTwo[8] = rowNineAvgG
+  hThree[8] = rowNineAvgB
 
-  amp[9] = constrain(map(rowTenAvgR, 255, 0, 1, 0), 0, 1)
-  freq[9] = constrain(map(rowTenAvgG, 255, 0, 500, 100), 100, 500)
+  amp[9] = constrain(map(rowTenAvgR, 255, 0, 1, 0.2), 0.2, 1)
+  freq[9] = constrain(map(rowTenAvgG, 255, 0, 500, 200), 200, 500)
   p[9] = constrain(map(rowTenAvgB, 255, 0, 1, -1), -1, 1)
+  hOne[9] = rowTenAvgR
+  hTwo[9] = rowTenAvgG
+  hThree[9] = rowTenAvgB
+
   rowOneAvgR = 0    
   rowOneAvgG = 0    
   rowOneAvgB = 0
 
   rowTwoAvgR = 0    
-  rowTwoAvgG = 0    
+  rowTwoAvgG = 0
   rowTwoAvgB = 0
 
   rowThreeAvgR = 0    
@@ -446,13 +479,15 @@ function imageLoaded(img){
 
 function draw(){
 
-      
-
-  if(frameCount%30 == 0){
+  if(frameCount%18 == 0){
     Camp = amp[Ccolum]
     Cfreq = Math.round(freq[Ccolum])
     Cp = p[Ccolum]
+    CHOne = hOne[Ccolum]
+    CHTwo = hTwo[Ccolum]
+    CHThree = hThree[Ccolum]
     Ccolum ++
+    console.log(CHOne)
   }
   if(Ccolum == 9){
     Ccolum = 0
@@ -464,9 +499,23 @@ function draw(){
     osc.amp(Camp, 0.1);
     osc.pan(Cp, 0.1);
   }
-
   
+  fill('white')
+  rect(width/4,height/2+height/4,100,-255)
+  fill('red')
+  rect(width/4,height/2+height/4,100,-CHOne);
+
+  fill('white')
+  rect(width/2,height/2+height/4,100,-255)
+  fill('green')
+  rect(width/2,height/2+height/4,100,-CHTwo);
+
+  fill('white')
+  rect(width/2+width/4,height/2+height/4,100,-255)
+  fill('blue')
+  rect(width/2+width/4,height/2+height/4,100,-CHThree);
 }
+
 function playOscillator() {
   osc.start();
   playing = true;
