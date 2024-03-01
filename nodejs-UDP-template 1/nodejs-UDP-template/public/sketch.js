@@ -57,8 +57,10 @@ let CHOne = 0, CHTwo = 0, CHThree = 0
 
 
 function setup(){
+
   // Laver canvas
   cnv = createCanvas(windowWidth,windowHeight);
+
   // Starter oscilatoren når mussen bliver klikket
   cnv.mousePressed(playOscillator);
 
@@ -79,8 +81,9 @@ function setup(){
   osc = new p5.Oscillator();
 }
 
+// Funktion når billedet bliver loaded
 function imageLoaded(img){
-  image(img,0,0)
+  image(img,0,0) // Laver billede
   console.log("image loaded")
   
   // FINDER VÆRDIER FOR RÆKKE 1
@@ -353,6 +356,7 @@ function imageLoaded(img){
   rowTenAvgB = Math.round(rowTenAvgB/rowTen.length)
   console.log(rowTenAvgR+" "+rowTenAvgG+" "+rowTenAvgB)
 
+  // Sætter amp, freq, pan og højderne på rektanglen
   amp[0] = constrain(map(rowOneAvgR, 255, 0, 1, 0.2), 0.2, 1)
   freq[0] = constrain(map(rowOneAvgG, 255, 0, 500, 200), 200, 500)
   p[0] = constrain(map(rowOneAvgB, 255, 0, 1, -1), -1, 1)
@@ -423,6 +427,7 @@ function imageLoaded(img){
   hTwo[9] = rowTenAvgG
   hThree[9] = rowTenAvgB
 
+  // Dette nulstiller værdierne
   rowOneAvgR = 0    
   rowOneAvgG = 0    
   rowOneAvgB = 0
@@ -479,44 +484,49 @@ function imageLoaded(img){
 }
 
 function draw(){
-
+  // Hver 18 frame spiller den en ny lyd og laver nye søjler
   if(frameCount%18 == 0){
-    Camp = amp[Ccolum]
-    Cfreq = Math.round(freq[Ccolum])
-    Cp = p[Ccolum]
-    CHOne = hOne[Ccolum]
+    Camp = amp[Ccolum] // Camp er "Current Amp"
+    Cfreq = Math.round(freq[Ccolum]) // Cfreq er "Current Freq"
+    Cp = p[Ccolum] // Cp er "Current Pan"
+    CHOne = hOne[Ccolum] // CH står for "Current Height"
     CHTwo = hTwo[Ccolum]
     CHThree = hThree[Ccolum]
-    Ccolum ++
+    Ccolum ++ // Ccolum er hvilken af de 10 kolonner der bruges
     console.log(CHOne)
   }
+  // Current Column sættes til 0 efter alle 10 er brugt
   if(Ccolum == 9){
     Ccolum = 0
   }
   console.log('amp: '+Camp+' freq: '+Cfreq+' pan: '+Cp)
   if (playing) {
-    // smooth the transitions by 0.1 seconds
+    // Smooth the transitions by 0.1 seconds
     osc.freq(Cfreq, 0.1);
     osc.amp(Camp, 0.1);
     osc.pan(Cp, 0.1);
   }
 
- 
+  // Den hvide søjle skjuler den gamle søjle
   fill('white')
   rect(width/4-50,height/2+height/4,100,-255)
+  // Laver en søjle for den røde værdi
   fill('red')
   rect(width/4-50,height/2+height/4,100,-CHOne);
 
   fill('white')
   rect(width/2-50,height/2+height/4,100,-255)
+  // Laver en søjle for den grønne værdi
   fill('green')
   rect(width/2-50,height/2+height/4,100,-CHTwo);
 
   fill('white')
   rect(width/2-50+width/4,height/2+height/4,100,-255)
+  // Laver en søjle for den blå værdi
   fill('blue')
   rect(width/2-50+width/4,height/2+height/4,100,-CHThree);
 
+  // Laver en cirkel der skalerer ud fra amp
   fill(255)
   ellipse(width/2,height/4,100)
   fill(0)
@@ -524,12 +534,13 @@ function draw(){
 
 }
 
+// Starter oscillatoren
 function playOscillator() {
   osc.start();
   playing = true;
 }
 
-
+// Sætter oscillatoren til at bruge den slags lyd man vælger
 function handleType(){
   osc.setType( dropDown.value() )
 }
