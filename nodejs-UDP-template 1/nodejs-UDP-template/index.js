@@ -106,11 +106,11 @@ udpSocket.on('error', (err) => {
 });
 
 // port, ip adresse, callback
-udpSocket.bind(port,ip.address(),false);
+udpSocket.bind(port,ip.address("public","ipv4"),false);
 
 
 const sendUdp = (message) => {
-  udpSocket.send(message, port, ip.address(), (error) => {
+  udpSocket.send(message, port, ip.address("public","ipv4"), (error) => {
     if (error) {
       console.error(error);
       udpSocket.close();
