@@ -55,6 +55,7 @@ let hOne = [],hTwo = [],hThree = [];
 let CHOne = 0, CHTwo = 0, CHThree = 0
 
 
+
 function setup(){
   // Laver canvas
   cnv = createCanvas(windowWidth,windowHeight);
@@ -499,21 +500,28 @@ function draw(){
     osc.amp(Camp, 0.1);
     osc.pan(Cp, 0.1);
   }
-  
+
+ 
   fill('white')
-  rect(width/4,height/2+height/4,100,-255)
+  rect(width/4-50,height/2+height/4,100,-255)
   fill('red')
-  rect(width/4,height/2+height/4,100,-CHOne);
+  rect(width/4-50,height/2+height/4,100,-CHOne);
 
   fill('white')
-  rect(width/2,height/2+height/4,100,-255)
+  rect(width/2-50,height/2+height/4,100,-255)
   fill('green')
-  rect(width/2,height/2+height/4,100,-CHTwo);
+  rect(width/2-50,height/2+height/4,100,-CHTwo);
 
   fill('white')
-  rect(width/2+width/4,height/2+height/4,100,-255)
+  rect(width/2-50+width/4,height/2+height/4,100,-255)
   fill('blue')
-  rect(width/2+width/4,height/2+height/4,100,-CHThree);
+  rect(width/2-50+width/4,height/2+height/4,100,-CHThree);
+
+  fill(255)
+  ellipse(width/2,height/4,100)
+  fill(0)
+  ellipse(width/2,height/4,Camp*100)
+
 }
 
 function playOscillator() {
