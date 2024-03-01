@@ -41,11 +41,14 @@ let rowNineAvgB = 0;
 let rowTenAvgR = 0;
 let rowTenAvgG = 0;
 let rowTenAvgB = 0;
-let amp = 0;
-let freq = 0;
-let p = 0;
-let colum = 1;
-let frames = 0;
+let amp = [];
+let freq = [];
+let p = [];
+let Camp;
+let Cfreq;
+let Cp;
+let Ccolum = 0;
+
 
 
 function setup(){
@@ -60,7 +63,7 @@ function setup(){
     loadImage('data:image/png;base64,' + msg, imageLoaded);
   })
   frameRate(60)
-  
+  osc = new p5.Oscillator();
 }
 
 function imageLoaded(img){
@@ -337,67 +340,66 @@ function imageLoaded(img){
   }
   rowTenAvgB = Math.round(rowTenAvgB/rowTen.length)
   console.log(rowTenAvgR+" "+rowTenAvgG+" "+rowTenAvgB)
-  frameRate(60)
-  colum = 0
-  frames = 1
-  while(colum < 10){
-    if(frames%30 === 0){
-    colum ++
-    if(colum == 1){
-      amp = constrain(map(rowOneAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowOneAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowOneAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 2){
-      amp = constrain(map(rowTwoAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowTwoAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowTwoAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 3){
-      amp = constrain(map(rowThreeAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowThreeAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowThreeAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 4){
-      amp = constrain(map(rowFourAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowFourAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowFourAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 5){
-      amp = constrain(map(rowFiveAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowFiveAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowFiveAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 6){
-      amp = constrain(map(rowSixAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowSixAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowSixAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 7){
-      amp = constrain(map(rowSevenAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowSevenAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowSevenAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 8){
-      amp = constrain(map(rowEightAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowEightAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowEightAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 9){
-      amp = constrain(map(rowNineAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowNineAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowNineAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      if(colum == 10){
-      amp = constrain(map(rowTenAvgR, 255, 0, 0, 1), 0, 1)
-      freq = constrain(map(rowTenAvgG, 255, 0, 100, 500), 100, 500)
-      p = constrain(map(rowTenAvgB, 255, 0, -1, 1), -1, 1)
-      }
-      freq = Math.round(freq)
-      console.log(colum)
-  }
+
+      amp[0] = constrain(map(rowOneAvgR, 255, 0, 0, 1), 0, 1)
+      freq[0] = constrain(map(rowOneAvgG, 255, 0, 100, 500), 100, 500)
+      p[0] = constrain(map(rowOneAvgB, 255, 0, -1, 1), -1, 1)
     
-       console.log(amp+' :amp '+freq+' :freq '+p+' p')
-    frames ++
-  }
+      amp[1] = constrain(map(rowTwoAvgR, 255, 0, 0, 1), 0, 1)
+      freq[1] = constrain(map(rowTwoAvgG, 255, 0, 100, 500), 100, 500)
+      p[1] = constrain(map(rowTwoAvgB, 255, 0, -1, 1), -1, 1)
+
+      amp[2] = constrain(map(rowThreeAvgR, 255, 0, 0, 1), 0, 1)
+      freq[2] = constrain(map(rowThreeAvgG, 255, 0, 100, 500), 100, 500)
+      p[2] = constrain(map(rowThreeAvgB, 255, 0, -1, 1), -1, 1)
+      
+      amp[3] = constrain(map(rowFourAvgR, 255, 0, 0, 1), 0, 1)
+      freq[3] = constrain(map(rowFourAvgG, 255, 0, 100, 500), 100, 500)
+      p[3] = constrain(map(rowFourAvgB, 255, 0, -1, 1), -1, 1)
+
+      amp[4] = constrain(map(rowFiveAvgR, 255, 0, 0, 1), 0, 1)
+      freq[4] = constrain(map(rowFiveAvgG, 255, 0, 100, 500), 100, 500)
+      p[4] = constrain(map(rowFiveAvgB, 255, 0, -1, 1), -1, 1)
+
+      amp[5] = constrain(map(rowSixAvgR, 255, 0, 0, 1), 0, 1)
+      freq[5] = constrain(map(rowSixAvgG, 255, 0, 100, 500), 100, 500)
+      p[5] = constrain(map(rowSixAvgB, 255, 0, -1, 1), -1, 1)
+
+      amp[6] = constrain(map(rowSevenAvgR, 255, 0, 0, 1), 0, 1)
+      freq[6] = constrain(map(rowSevenAvgG, 255, 0, 100, 500), 100, 500)
+      p[6] = constrain(map(rowSevenAvgB, 255, 0, -1, 1), -1, 1)
+
+      amp[7] = constrain(map(rowEightAvgR, 255, 0, 0, 1), 0, 1)
+      freq[7] = constrain(map(rowEightAvgG, 255, 0, 100, 500), 100, 500)
+      p[7] = constrain(map(rowEightAvgB, 255, 0, -1, 1), -1, 1)
+
+      amp[8] = constrain(map(rowNineAvgR, 255, 0, 0, 1), 0, 1)
+      freq[8] = constrain(map(rowNineAvgG, 255, 0, 100, 500), 100, 500)
+      p[8] = constrain(map(rowNineAvgB, 255, 0, -1, 1), -1, 1)
+
+      amp[9] = constrain(map(rowTenAvgR, 255, 0, 0, 1), 0, 1)
+      freq[9] = constrain(map(rowTenAvgG, 255, 0, 100, 500), 100, 500)
+      p[9] = constrain(map(rowTenAvgB, 255, 0, -1, 1), -1, 1)
 }
+
+function draw(){
+  if(frameCount%30 == 0){
+    Camp = amp[Ccolum]
+    Cfreq = freq[Ccolum]
+    Cp = p[Ccolum]
+    Ccolum ++
+  }
+  if(Ccolum == 9){
+    Ccolum = 0
+  }
+  console.log('amp'+Camp+'freq'+Cfreq+'pan'+Cp)
+  if (playing) {
+    // smooth the transitions by 0.1 seconds
+    osc.freq(Cfreq, 0.1);
+    osc.amp(Camp, 0.1);
+    osc.pan(Cp, 0.1);
+  }
+
+  
+}
+
