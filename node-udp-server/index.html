@@ -2,41 +2,48 @@
 <html>
 <body>
 
-<video id="video" width="160" height="120" autoplay></video>
-<button id="snap">Snap Photo</button>
-<canvas id="canvas" width="160" height="120"></canvas>
+<video id="video" width="160" height="120" autoplay></video> <!-- Det viser video af dig -->
+<button id="snap">Snap Photo</button> <!-- Knap til tage billede -->
+<canvas id="canvas" width="160" height="120"></canvas> <!-- Canvas til p5.js -->
 
 <script>
-// Elements for taking the snapshot
+// Dette binder variablerne til elementerne fra html'en
 var video = document.getElementById('video');
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var snap = document.getElementById('snap');
 
-// Get access to the camera
+// Dette spørger om adgang til kameraet
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
         video.srcObject = stream;
         video.play();
     });
 }
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// Dette er en funktion der gør man kan pause
+const sleep = ms => new Promise(r => setTimeout(r, ms)); 
+
+// Denne funktion tager et billede hvert 3 sekundt
 async function pictureTaking(){
         while(1==1){
-        await sleep(3000);
-        context.drawImage(video, 0, 0, 160, 120);
-        var data = canvas.toDataURL('image/png');
-        sendImage(data);
+        await sleep(3000); // Venter 3 sekunder
+        context.drawImage(video, 0, 0, 160, 120); // Tager et billede
+        var data = canvas.toDataURL('image/png'); // Laver billedet om til data
+        sendImage(data); // Sender dataen
         }
 }
-// Trigger photo take
+
+// Tager billede når "Snap photo" bliver klikket
 snap.addEventListener("click", function() {
     context.drawImage(video, 0, 0, 160, 120);
     var data = canvas.toDataURL('image/png');
     sendImage(data);
 });
+
 pictureTaking();
-// Function to send image data to your server
+
+// Funktion der sender dataen til serveren
 function sendImage(imgData) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://10.78.66.126:4444/', true);
