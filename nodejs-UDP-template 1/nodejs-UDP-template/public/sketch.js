@@ -1,5 +1,4 @@
-//currentpage skal pege på det side-id der skal være aktivt først (fra html filen) 
-let udpDiv
+// Variabler
 let img;
 let rowOne = [];
 let rowTwo = [];
@@ -57,18 +56,19 @@ let CHOne = 0, CHTwo = 0, CHThree = 0
 
 
 function setup(){
+  // Laver canvas
   cnv = createCanvas(windowWidth,windowHeight);
+  // Starter oscilatoren når mussen bliver klikket
   cnv.mousePressed(playOscillator);
 
+  // Laver en dropdown hvor man kan vælge lydkurver
   dropDown = createSelect().position(20,125)
-  dropDown.option('sine')
-  dropDown.option('square')
-  dropDown.option('triangle')
-  dropDown.option('sawtooth')
-  
+  dropDown.option('Sine')
+  dropDown.option('Square')
+  dropDown.option('Triangle')
+  dropDown.option('Sawtooth')
   dropDown.input(handleType)
   
-
   var socket = io()
 
   socket.on('udp-message', (msg)=>{
