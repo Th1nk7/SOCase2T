@@ -48,7 +48,7 @@ let Camp;
 let Cfreq;
 let Cp;
 let Ccolum = 0;
-
+let playing = false;
 
 
 function setup(){
