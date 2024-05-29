@@ -66,10 +66,10 @@ function setup(){
 
   // Laver en dropdown hvor man kan vælge lydkurver
   dropDown = createSelect().position(20,125)
-  dropDown.option('Sine')
-  dropDown.option('Square')
-  dropDown.option('Triangle')
-  dropDown.option('Sawtooth')
+  dropDown.option('sine')
+  dropDown.option('square')
+  dropDown.option('triangle')
+  dropDown.option('sawtooth')
   dropDown.input(handleType)
   
   var socket = io()
@@ -111,7 +111,6 @@ function imageLoaded(img){
     rowOneAvgB += rowOne[i][2];
   }
   rowOneAvgB = Math.round(rowOneAvgB/rowOne.length)
-  console.log(rowOneAvgR+" "+rowOneAvgG+" "+rowOneAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 2
   for(let y=10;y<img.height-1;y+=10){
@@ -138,7 +137,6 @@ function imageLoaded(img){
     rowTwoAvgB += rowTwo[i][2];
   }
   rowTwoAvgB = Math.round(rowTwoAvgB/rowTwo.length)
-  console.log(rowTwoAvgR+" "+rowTwoAvgG+" "+rowTwoAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 3
   for(let y=10;y<img.height-1;y+=10){
@@ -165,7 +163,6 @@ function imageLoaded(img){
     rowThreeAvgB += rowThree[i][2];
   }
   rowThreeAvgB = Math.round(rowThreeAvgB/rowThree.length)
-  console.log(rowThreeAvgR+" "+rowThreeAvgG+" "+rowThreeAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 4
   for(let y=10;y<img.height-1;y+=10){
@@ -192,7 +189,6 @@ function imageLoaded(img){
     rowFourAvgB += rowFour[i][2];
   }
   rowFourAvgB = Math.round(rowFourAvgB/rowFour.length)
-  console.log(rowFourAvgR+" "+rowFourAvgG+" "+rowFourAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 5
   for(let y=10;y<img.height-1;y+=10){
@@ -219,7 +215,6 @@ function imageLoaded(img){
     rowFiveAvgB += rowFive[i][2];
   }
   rowFiveAvgB = Math.round(rowFiveAvgB/rowFive.length)
-  console.log(rowFiveAvgR+" "+rowFiveAvgG+" "+rowFiveAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 6
   for(let y=10;y<img.height-1;y+=10){
@@ -246,7 +241,6 @@ function imageLoaded(img){
     rowSixAvgB += rowSix[i][2];
   }
   rowSixAvgB = Math.round(rowSixAvgB/rowSix.length)
-  console.log(rowSixAvgR+" "+rowSixAvgG+" "+rowSixAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 7
   for(let y=10;y<img.height-1;y+=10){
@@ -273,7 +267,6 @@ function imageLoaded(img){
     rowSevenAvgB += rowSeven[i][2];
   }
   rowSevenAvgB = Math.round(rowSevenAvgB/rowSeven.length)
-  console.log(rowSevenAvgR+" "+rowSevenAvgG+" "+rowSevenAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 8
   for(let y=10;y<img.height-1;y+=10){
@@ -300,7 +293,6 @@ function imageLoaded(img){
     rowEightAvgB += rowEight[i][2];
   }
   rowEightAvgB = Math.round(rowEightAvgB/rowEight.length)
-  console.log(rowEightAvgR+" "+rowEightAvgG+" "+rowEightAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 9
   for(let y=10;y<img.height-1;y+=10){
@@ -327,7 +319,6 @@ function imageLoaded(img){
     rowNineAvgB += rowNine[i][2];
   }
   rowNineAvgB = Math.round(rowNineAvgB/rowNine.length)
-  console.log(rowNineAvgR+" "+rowNineAvgG+" "+rowNineAvgB)
 
   // FINDER VÆRDIER FOR RÆKKE 10
   for(let y=10;y<img.height-1;y+=10){
@@ -354,7 +345,6 @@ function imageLoaded(img){
     rowTenAvgB += rowTen[i][2];
   }
   rowTenAvgB = Math.round(rowTenAvgB/rowTen.length)
-  console.log(rowTenAvgR+" "+rowTenAvgG+" "+rowTenAvgB)
 
   // Sætter amp, freq, pan og højderne på rektanglen
   amp[0] = constrain(map(rowOneAvgR, 255, 0, 1, 0.2), 0.2, 1)
@@ -493,13 +483,11 @@ function draw(){
     CHTwo = hTwo[Ccolum]
     CHThree = hThree[Ccolum]
     Ccolum ++ // Ccolum er hvilken af de 10 kolonner der bruges
-    console.log(CHOne)
   }
   // Current Column sættes til 0 efter alle 10 er brugt
   if(Ccolum == 9){
     Ccolum = 0
   }
-  console.log('amp: '+Camp+' freq: '+Cfreq+' pan: '+Cp)
   if (playing) {
     // Smooth the transitions by 0.1 seconds
     osc.freq(Cfreq, 0.1);
@@ -543,4 +531,5 @@ function playOscillator() {
 // Sætter oscillatoren til at bruge den slags lyd man vælger
 function handleType(){
   osc.setType( dropDown.value() )
+  console.log("Changed to "+dropDown.value())
 }
